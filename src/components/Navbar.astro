@@ -1,0 +1,50 @@
+---
+const links = [
+  { name: "Нүүр", href: "#hero" },
+  { name: "Танилцуулага", href: "#report" },
+  { name: "Хамт олон", href: "#services" },
+  { name: "Сэтгэгдэл", href: "#testimonials" },
+  { name: "Холбоо барих", href: "#contact" },
+  { name: "Нэвтрэх", href: "#login" },// Нэвтрэх холбоос
+  { name: "Бүртгүүлэх", href: "#register" }
+];
+---
+<head>
+  <!-- Alpine.js-г CDN-ээр холбох -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+
+<nav class="bg-blue-700 text-white p-4 shadow-md fixed w-full z-50">
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Лого -->
+    <a href="/" class="text-2xl font-bold">Тээврийн систем</a>
+
+    <!-- Том дэлгэцийн цэс -->
+    <ul class="hidden md:flex gap-4">
+      {links.map((link) => (
+        <li>
+          <a href={link.href} class="hover:underline">{link.name}</a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile Menu Button -->
+    <div x-data="{ isOpen: false }">
+      <button @click="isOpen = !isOpen" class="md:hidden text-white text-3xl">
+        <span x-show="!isOpen">☰</span>
+        <span x-show="isOpen">✖</span>
+      </button>
+
+      <!-- Гар утасны цэс (Dropdown) -->
+      <div x-show="isOpen" class="md:hidden bg-blue-700 w-full">
+        <ul class="flex flex-col gap-4 p-4">
+          {links.map((link) => (
+            <li>
+              <a href={link.href} class="block py-2 text-center hover:bg-blue-800">{link.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
